@@ -10,5 +10,9 @@
   "permissions": [
     "tabs",
     "https://web.archive.org/save/*"
-  ]
+  ],
+  "background": {
+    "scripts": ["background-script.js"],
+    "persistent": false
+  }
 }

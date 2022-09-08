@@ -1,4 +1,3 @@
-const baseUrl = "https://web.archive.org/save/";
 const saving = document.querySelector("#saving");
 const errors = document.querySelector("#errors");
 const saveButton = document.querySelector("#save");
@@ -11,42 +10,50 @@ saving.style.display = "none";
 success.style.display = "none";
 errors.style.display = "none";
 
-var redirectUrl = "";
 
-const savePage = async url => {
-  saving.style.display = "block";
-  try {
-    const response = await fetch(`${baseUrl}${url}`);
+// const savePage = async url => {
+//   saving.style.display = "block";
+//   try {
+    
 
-    saving.style.display = "none";
+//     saving.style.display = "none";
 
-    if(response.status == 200){
-      visit.setAttribute("href", response.url);
-      redirectUrl = response.url;
-      success.style.display = "block";
-    }
-    else {
-      errors.style.display = "block";
-      errors.textContent = "Could not save page";
-    }
+//     if(response.status == 200){
+//       visit.setAttribute("href", response.url);
+//       redirectUrl = response.url;
+//       success.style.display = "block";
+//     }
+//     else {
+//       errors.style.display = "block";
+//       errors.textContent = "Could not save page";
+//     }
 
-  } catch (error) {
-    saving.style.display = "none";
+//   } catch (error) {
+//     saving.style.display = "none";
+//     errors.style.display = "block";
+//     errors.textContent = "Could not save page";
+//   }
+// }
+
+function handleResponse(response) {
+  console.log(response);
+  saving.style.display = "none";
+  if(response.url){
+    redirectUrl = response.url;
+    success.style.display = "block";
+  }
+  else if(response.error){
     errors.style.display = "block";
-    errors.textContent = "Could not save page";
+    errors.textContent = response.error;
   }
 }
 
-const getCurrentUrl = async () => {
-  let queryOptions = { active: true, lastFocusedWindow: true };
-  // `tab` will either be a `tabs.Tab` instance or `undefined`.
-  let [tab] = await browser.tabs.query(queryOptions);
-  return tab.url;
-};
 
-const handleSumbit = async () => {
-  const url = await getCurrentUrl();
-  savePage(url);
+const handleSumbit = () => {
+  saving.style.display = "block"; 
+  browser.runtime.sendMessage({
+    action: "save"
+  }).then(handleResponse);
 };
 
 
