@@ -1,16 +1,19 @@
 {
   "name": "archive-org-extension",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A browser extension to save a website on archive.org",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukasBenner/archive-org-chrome-extension.git"
+  },
+  "author": "Lukas Benner",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "webpack-cli": "^4.10.0"
-  }
+  "bugs": {
+    "url": "https://github.com/LukasBenner/archive-org-chrome-extension/issues"
+  },
+  "homepage": "https://github.com/LukasBenner/archive-org-chrome-extension#readme"
 }
