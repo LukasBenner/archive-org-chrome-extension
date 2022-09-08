@@ -4,7 +4,8 @@
   "description": "A browser extension to save a website on archive.org",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:firefox": "web-ext run --verbose --source-dir ./src/"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/LukasBenner/archive-org-chrome-extension/issues"
   },
-  "homepage": "https://github.com/LukasBenner/archive-org-chrome-extension#readme"
+  "homepage": "https://github.com/LukasBenner/archive-org-chrome-extension#readme",
+  "devDependencies": {
+    "web-ext": "^7.2.0",
+    "webextension-polyfill": "^0.10.0"
+  }
 }

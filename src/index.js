@@ -1,11 +1,11 @@
 const baseUrl = "https://web.archive.org/save/";
 const saving = document.querySelector("#saving");
-const saved = document.querySelector("#saved");
 const errors = document.querySelector("#errors");
 const saveButton = document.querySelector("#save");
 const visit = document.querySelector("#visit");
 const success = document.querySelector(".success");
 const copyToClipboard = document.querySelector("#copyToClipboard");
+
 
 saving.style.display = "none";
 success.style.display = "none";
@@ -40,7 +40,7 @@ const savePage = async url => {
 const getCurrentUrl = async () => {
   let queryOptions = { active: true, lastFocusedWindow: true };
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
-  let [tab] = await chrome.tabs.query(queryOptions);
+  let [tab] = await browser.tabs.query(queryOptions);
   return tab.url;
 };
 
