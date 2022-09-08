@@ -3,6 +3,12 @@
   "description": "Save a website on archive.org",
   "version": "1.0",
   "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "lukasbenner@mailbox.org",
+      "strict_min_version": "42.0"
+    }
+  },  
   "browser_action": {
     "default_popup": "index.html",
     "default_title": "archive.org"
