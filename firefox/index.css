@@ -1,0 +1,58 @@
+.container{
+  margin: 0;
+  padding: 10px;
+  border-radius: 5px;
+  width: 400px;
+}
+
+.act {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info {
+  font-weight: 700;
+  font-size: larger;
+}
+
+.savedPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-block: 0.5em;
+}
+
+
+.btn {
+  border: none;
+  border-radius: 5px;
+  font-family: 'Lato';
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 5px 5px;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.btn-save {
+  background-color: #F48736;
+  color: #fff;
+}
+.btn-visit {
+  background-color: #009C4C;
+  color: #fff;
+}
+.btn-copy {
+  background-color: #005EB9;
+  color: #fff;
+}

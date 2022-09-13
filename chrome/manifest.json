@@ -1,0 +1,19 @@
+{
+  "name": "archive.org extension",
+  "description": "Save a website on archive.org",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "host_permissions":[
+    "https://web.archive.org/save/*"
+  ],
+  "background": {
+    "service_worker": "background-script.js"
+  }
+}
