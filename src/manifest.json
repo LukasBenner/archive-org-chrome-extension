@@ -15,6 +15,7 @@
   },
   "permissions": [
     "tabs",
+    "storage",
     "https://web.archive.org/save/*"
   ],
   "background": {

@@ -2,17 +2,25 @@
   margin: 0;
   padding: 10px;
   border-radius: 5px;
-  width: 200px;
+  width: 400px;
 }
 
 .act {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .info {
   font-weight: 700;
   font-size: larger;
+}
+
+.savedPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-block: 0.5em;
 }
 
 
@@ -24,7 +32,7 @@
   color: inherit;
   background: none;
   cursor: pointer;
-  padding: 10px 10px;
+  padding: 5px 5px;
   display: inline-block;
   text-transform: uppercase;
   letter-spacing: 1px;

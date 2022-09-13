@@ -7,36 +7,53 @@ const getCurrentUrl = async () => {
   return tab.url;
 };
 
+function saveInBrowserStorage(storageRequest, response) {
+  var savedPages = [];
+  storageRequest.then((result) => {
+    console.log(result, 'result');
+    if('savedPages' in result)
+      savedPages = result['savedPages'];
+    savedPages.push(response.url);
+    console.log(savedPages, 'savedPages');
+    browser.storage.local.set({ 'savedPages': savedPages });
+  })
+}
+
 const sendError = (error) => new Promise((resolve) => {
   resolve({ error: error });
 });
 
-async function popupMsgReceived(msg, sender, sendRes) {
-  console.log("Msg received", msg);
+const sendResponse = (response) => new Promise((resolve) => {
+  resolve({url: response.url})
+})
 
-  let url = await getCurrentUrl();
+async function popupMsgReceived() {
+  const url = await getCurrentUrl();
   try {
     const response = await fetch(`${baseUrl}${url}`);
     console.log(response);
 
     if(response.ok){
-      return new Promise((resolve) => {
-        resolve({url: response.url});
-      });
+      try {
+        var storageRequest =  browser.storage.local.get('savedPages');
+        saveInBrowserStorage(storageRequest, response);
+
+      } catch (error) {
+        return sendError("Problem saving the url in browser storage!")
+      }
+      return sendResponse({url: response.url})
     }
     else{
-      return sendError("Could not be saved");
+      if(response.statusText == 'No Reason Phrase')
+        return sendError('This url is a page saved on archive.org!');
+      else
+        return sendError(response.statusText);
     }
-
-
   } catch (error) {
     console.log(error);
-    return sendError(error);
+    return sendError("Problem reaching archive.org!");
   }
-        
-
 }
-
 
 
 browser.runtime.onMessage.addListener(popupMsgReceived);
