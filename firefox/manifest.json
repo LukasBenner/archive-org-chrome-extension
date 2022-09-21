@@ -10,7 +10,7 @@
     }
   },  
   "browser_action": {
-    "default_popup": "../src/index.html",
+    "default_popup": "index.html",
     "default_title": "archive.org"
   },
   "permissions": [
@@ -19,7 +19,7 @@
     "https://web.archive.org/save/*"
   ],
   "background": {
-    "scripts": ["../src/background-script.js"],
+    "scripts": ["background-script.js"],
     "persistent": false
   }
 }

@@ -5,25 +5,6 @@
   width: 400px;
 }
 
-.act {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.info {
-  font-weight: 700;
-  font-size: larger;
-}
-
-.savedPage {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-block: 0.5em;
-}
-
-
 .btn {
   border: none;
   border-radius: 5px;
@@ -55,4 +36,48 @@
 .btn-copy {
   background-color: #005EB9;
   color: #fff;
+  font-size: smaller;
+}
+
+.act {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.info {
+  font-weight: 700;
+  font-size: larger;
+}
+
+.pages {
+  height: 200;
+  overflow-y: scroll;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: gray;
+  background-color: lightgray;
+}
+
+.savedPage {
+  display: grid;
+  gap:1rem;
+  margin: 0.5em;
+  padding: 5px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: gray;
+}
+
+.savePage > a {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 2;
+  font-size: small;
+
+}
+
+.savePage  button{
+  background-color: red;
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 2;
 }

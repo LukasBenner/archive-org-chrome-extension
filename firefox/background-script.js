@@ -11,9 +11,13 @@ function saveInBrowserStorage(storageRequest, response) {
   var savedPages = [];
   storageRequest.then((result) => {
     console.log(result, 'result');
-    if('savedPages' in result)
+    if('savedPages' in result){
       savedPages = result['savedPages'];
-    savedPages.push(response.url);
+    }
+    const re = /https:\/\/web.archive.org\/web\/[0-9]*\/(.*)/i;
+    const found = response.url.match(re);
+    const savedUrl = found[1];
+    savedPages.push({'savedUrl':savedUrl, 'archiveLink': response.url, 'date': Date.now()});
     console.log(savedPages, 'savedPages');
     browser.storage.local.set({ 'savedPages': savedPages });
   })

@@ -12,22 +12,26 @@ success.style.display = "none";
 errors.style.display = "none";
 
 
-function createNewPageFragment(url){
-
-  const re = /https:\/\/web.archive.org\/web\/[0-9]*\/(.*)/i;
-  const found = url.match(re);
+function createNewPageFragment( {savedUrl, archiveLink, date }){
 
   var link = document.createElement('a');
-  link.innerText = found[1];
-  link.setAttribute('href', url);
+  link.innerText = savedUrl;
+  link.setAttribute('href', savedUrl);
   link.setAttribute('target', '_blank');
 
   var copyButton = document.createElement('button');
   copyButton.classList.add('btn', 'btn-copy')
   copyButton.innerText = 'Copy';
   copyButton.addEventListener('click', async () => {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(archiveLink);
   })
+
+  var dateLabel = document.createElement('label');
+  dateLabel.classList.add('dateLabel')
+  dateLabel.innerText = `${new Date(date).toLocaleDateString("de-de")}`;
+ 
+
+
 
   var page = document.createElement('div');
   page.className = "savedPage"
@@ -35,6 +39,7 @@ function createNewPageFragment(url){
   var savedPageFragment = document.createDocumentFragment();
   page.appendChild(link);
   page.appendChild(copyButton);
+  page.appendChild(dateLabel);
   savedPageFragment.appendChild(page);
 
   return savedPageFragment;
