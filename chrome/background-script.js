@@ -19,15 +19,8 @@ function saveInBrowserStorage(storageRequest, response) {
   })
 }
 
-const sendError = (error) => new Promise((resolve) => {
-  resolve({ error: error });
-});
 
-const sendResponse = (response) => new Promise((resolve) => {
-  resolve({url: response.url})
-})
-
-async function popupMsgReceived() {
+async function popupMsgReceived(request, sender, sendResponse) {
   const url = await getCurrentUrl();
   try {
     const response = await fetch(`${baseUrl}${url}`);
@@ -39,20 +32,21 @@ async function popupMsgReceived() {
         saveInBrowserStorage(storageRequest, response);
 
       } catch (error) {
-        return sendError("Problem saving the url in browser storage!")
+        sendResponse({error: "Problem saving the url in browser storage!"});
       }
-      return sendResponse({url: response.url})
+      return Promise.resolve({url: response.url});
     }
     else{
       if(response.statusText == 'No Reason Phrase')
-        return sendError('This url is a page saved on archive.org!');
+        sendResponse({error: 'This url is a page saved on archive.org!'});
       else
-        return sendError(response.statusText);
+        sendResponse({error: response.statusText});
     }
   } catch (error) {
     console.log(error);
-    return sendError("Problem reaching archive.org!");
+    sendResponse({error: "Problem reaching archive.org!"});
   }
+  return true;
 }
 
 
