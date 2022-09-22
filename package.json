@@ -1,13 +1,13 @@
 {
   "name": "archive-org-extension",
-  "version": "1.0.0",
+  "version": "1.0",
   "description": "A browser extension to save a website on archive.org",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:firefox": "web-ext run --verbose --source-dir ./firefox/",
-    "build": "web-ext build --source-dir ./firefox/",
-    "sign": "web-ext sign --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET"
+    "build-firefox": "web-ext build --source-dir ./firefox/",
+    "sign-firefox": "web-ext sign --source-dir ./firefox/ --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET"
   },
   "repository": {
     "type": "git",
