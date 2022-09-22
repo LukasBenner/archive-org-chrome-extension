@@ -5,7 +5,7 @@
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
-      "id": "lukasbenner@mailbox.org",
+      "id": "6fef0dfe-a01a-460b-871e-d34e9b78c295",
       "strict_min_version": "48.0"
     }
   },  
