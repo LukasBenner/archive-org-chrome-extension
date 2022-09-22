@@ -28,6 +28,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+        
     - name: sign
       run: |
         npm ci
@@ -35,8 +36,34 @@ jobs:
       env:
         AMO_JWT_ISSUER: ${{secrets.MOZILLA_JWT_ISSUER}}
         AMO_JWT_SECRET: ${{secrets.MOZILLA_JWT_SECRET}}
+        
     - name: archive result
       uses: actions/upload-artifact@v3
       with:
         name: addon-installer
         path: web-ext-artifacts/*.xpi
+        
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Changes in this Release
+          - First Change
+          - Second Change
+        draft: false
+        prerelease: false
+        
+    - name: upload addon artifact
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./web-ext-artifacts/*.xpi
+        asset_name: archiveOrgAddon.tar.gz
+        asset_content_type: application/gzip
