@@ -1,6 +1,6 @@
 {
   "name": "archive-org-extension",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A browser extension to save a website on archive.org",
   "main": "index.html",
   "scripts": {
