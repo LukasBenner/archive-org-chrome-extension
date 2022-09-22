@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:firefox": "web-ext run --verbose --source-dir ./firefox/",
-    "build-firefox": "web-ext build --source-dir ./firefox/",
+    "build-firefox": "web-ext build --source-dir ./firefox/ --overwrite-dest",
     "sign-firefox": "web-ext sign --source-dir ./firefox/ --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET --channel=unlisted",
     "bump": "npm version"
   },
