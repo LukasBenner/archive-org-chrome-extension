@@ -1,12 +1,12 @@
 {
   "name": "archive.org extension",
   "description": "Save a website on archive.org",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {
       "id": "lukasbenner@mailbox.org",
-      "strict_min_version": "42.0"
+      "strict_min_version": "48.0"
     }
   },  
   "browser_action": {
