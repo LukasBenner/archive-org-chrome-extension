@@ -5,11 +5,13 @@ const visit = document.querySelector("#visit");
 const success = document.querySelector(".success");
 const copyToClipboard = document.querySelector("#copyToClipboard");
 const pagesDiv = document.querySelector(".pages")
+const clearPagesButton = document.querySelector('#clearPages');
 
 
 saving.style.display = "none";
 success.style.display = "none";
 errors.style.display = "none";
+pagesDiv.style.display = "none";
 
 
 function createNewPageFragment( {savedUrl, archiveLink, date }){
@@ -28,11 +30,8 @@ function createNewPageFragment( {savedUrl, archiveLink, date }){
 
   var dateLabel = document.createElement('label');
   dateLabel.classList.add('dateLabel')
-  dateLabel.innerText = `${new Date(date).toLocaleDateString("de-de")}`;
+  dateLabel.innerText = `${new Date(date).toLocaleString("de-de")}`;
  
-
-
-
   var page = document.createElement('div');
   page.className = "savedPage"
 
@@ -83,6 +82,13 @@ function updateSavedPagesList() {
     if (result['savedPages']) {
       savedPages = result['savedPages'];
     }
+    savedPages.sort(function(pageA, pageB){return pageB.date - pageA.date});
+    
+    if(savedPages.length > 0)
+      pagesDiv.style.display = "block";
+    else
+    pagesDiv.style.display = "none";
+
     pagesDiv.innerHTML = '';
     savedPages.forEach(page => {
       const child = createNewPageFragment(page);
@@ -92,8 +98,15 @@ function updateSavedPagesList() {
   });
 }
 
+const handleClearPages  = () => {
+  browser.runtime.sendMessage({
+    action: "clear"
+  });
+}
+
 saveButton.addEventListener("click", e => handleSumbit(e));
 copyToClipboard.addEventListener("click", () => handleCopyToClipboard())
 visit.addEventListener("click", () => handleVisit());
+clearPagesButton.addEventListener("click", () => handleClearPages())
 browser.storage.local.onChanged.addListener(updateSavedPagesList);
 updateSavedPagesList();

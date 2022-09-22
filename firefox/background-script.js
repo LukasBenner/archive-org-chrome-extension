@@ -1,6 +1,6 @@
 const baseUrl = "https://web.archive.org/save/";
 
-const getCurrentUrl = async () => {
+const getCurrentTabUrl = async () => {
   let queryOptions = { active: true, lastFocusedWindow: true };
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
   let [tab] = await browser.tabs.query(queryOptions);
@@ -10,7 +10,6 @@ const getCurrentUrl = async () => {
 function saveInBrowserStorage(storageRequest, response) {
   var savedPages = [];
   storageRequest.then((result) => {
-    console.log(result, 'result');
     if('savedPages' in result){
       savedPages = result['savedPages'];
     }
@@ -18,7 +17,6 @@ function saveInBrowserStorage(storageRequest, response) {
     const found = response.url.match(re);
     const savedUrl = found[1];
     savedPages.push({'savedUrl':savedUrl, 'archiveLink': response.url, 'date': Date.now()});
-    console.log(savedPages, 'savedPages');
     browser.storage.local.set({ 'savedPages': savedPages });
   })
 }
@@ -31,11 +29,15 @@ const sendResponse = (response) => new Promise((resolve) => {
   resolve({url: response.url})
 })
 
-async function popupMsgReceived() {
-  const url = await getCurrentUrl();
+
+const clearPages = () => {
+  browser.storage.local.clear();
+}
+
+const savePage = async () => {
+  const url = await getCurrentTabUrl();
   try {
     const response = await fetch(`${baseUrl}${url}`);
-    console.log(response);
 
     if(response.ok){
       try {
@@ -49,7 +51,7 @@ async function popupMsgReceived() {
     }
     else{
       if(response.statusText == 'No Reason Phrase')
-        return sendError('This url is a page saved on archive.org!');
+        return sendError('Trying to archive an archived page!');
       else
         return sendError(response.statusText);
     }
@@ -57,6 +59,16 @@ async function popupMsgReceived() {
     console.log(error);
     return sendError("Problem reaching archive.org!");
   }
+}
+
+async function popupMsgReceived(msg) {
+  if(msg.action == "save"){
+    return savePage();
+  }
+  else if(msg.action == "clear"){
+    clearPages();
+  }
+  
 }
 
 
