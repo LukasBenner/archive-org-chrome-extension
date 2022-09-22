@@ -1,7 +1,17 @@
 {
-  "name": "archive.org extension",
-  "description": "Save a website on archive.org",
-  "version": "0.0.1",
+  "name": "Save on archive.org",
+  "description": "Addon to save a website on archive.org.",
+  "author" : "Lukas Benner",
+  "developer": {
+    "name": "Lukas Benner",
+    "url": "https://github.com/LukasBenner/archive-org-chrome-extension"
+  },
+  "homepage_url": "https://github.com/LukasBenner/archive-org-chrome-extension", 
+  "icons": {
+    "48": "archive.svg",
+    "96": "archive.svg"
+  },  
+  "version": "0.0.2",
   "manifest_version": 2,
   "browser_specific_settings": {
     "gecko": {

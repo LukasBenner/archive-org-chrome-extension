@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   height="96.000008"
+   viewBox="0 0 96 96.000007"
+   width="96"
+   version="1.1"
+   id="svg4"
+   sodipodi:docname="archive.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs8" />
+  <sodipodi:namedview
+     id="namedview6"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="4.8197675"
+     inkscape:cx="16.494572"
+     inkscape:cy="61.413751"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer5"
+     showguides="true" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer4"
+     inkscape:label="Background"
+     transform="translate(0.29928355,-0.13985707)">
+    <rect
+       style="opacity:1;fill:#fbfbfb;fill-opacity:1;stroke:none;stroke-width:1.80652;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       id="rect8858"
+       width="96"
+       height="96.000008"
+       x="-0.29928344"
+       y="0.13985707" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer5"
+     inkscape:label="Foreground"
+     style="display:inline">
+    <text
+       xml:space="preserve"
+       style="font-size:125.156px;opacity:1;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:9.42068;stroke-linecap:square;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+       x="2.8928769"
+       y="95.945335"
+       id="text8271"
+       transform="scale(1.0509996,0.95147515)"
+       inkscape:transform-center-x="6.4552283"
+       inkscape:transform-center-y="-3.374321"><tspan
+         sodipodi:role="line"
+         id="tspan8269"
+         x="2.8928769"
+         y="95.945335"
+         style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:9.42068;stroke-opacity:1">A</tspan></text>
+  </g>
+</svg>
