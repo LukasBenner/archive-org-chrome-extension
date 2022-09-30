@@ -1,3 +1,10 @@
+:root {
+  --color-background: #EBEBEB;
+  --color-orange: #F48736;
+  --color-blue: #08415C;
+  --color-red: #CE4C52;
+}
+
 .container{
   margin: 0;
   padding: 10px;
@@ -5,10 +12,40 @@
   width: 400px;
 }
 
-.act {
+.btn {
+  border: none;
+  border-radius: 5px;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  cursor: pointer;
+  padding: 5px 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  outline: none;
+  position: relative;
+  color: white;
+}
+.btn-save {
+  background-color: var(--color-orange);
+  width: 30%;
+}
+.btn-visit {
+  background-color: var(--color-orange);
+}
+.btn-copy {
+  background-color: var(--color-blue);
+}
+.btn-clearPages{
+  background-color: var(--color-red);
+  font-size: smaller;
+}
+
+.flex-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 5px 0;
 }
 
 .info {
@@ -16,43 +53,46 @@
   font-size: larger;
 }
 
-.savedPage {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-block: 0.5em;
+#errors {
+  color: red;
 }
 
-
-.btn {
-  border: none;
+.pages {
+  height: 200;
+  overflow-y: scroll;
   border-radius: 5px;
-  font-family: 'Lato';
-  font-size: inherit;
-  color: inherit;
-  background: none;
-  cursor: pointer;
-  padding: 5px 5px;
-  display: inline-block;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-  outline: none;
-  position: relative;
-  -webkit-transition: all 0.3s;
-  -moz-transition: all 0.3s;
-  transition: all 0.3s;
+  border-style: solid;
+  border-color: var(--color-blue);
+  background-color: var(--color-background);
 }
 
-.btn-save {
-  background-color: #F48736;
-  color: #fff;
+.savedPage {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: [col] auto [col] auto;
+  grid-template-rows: [row] auto [row];
+  margin: 0.5em;
+  padding: 5px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: var(--color-blue);
+  background-color: white;
 }
-.btn-visit {
-  background-color: #009C4C;
-  color: #fff;
+
+.savedPage a {
+  grid-row: row;
+  grid-column: col / span 2;
+  font-size: small;
 }
-.btn-copy {
-  background-color: #005EB9;
-  color: #fff;
+
+.savedPage  button{
+  background-color: var(--color-blue);
+  grid-row: row 2;
+  grid-column: col 1;
+}
+
+.savedPage  label{
+  grid-row: row 2;
+  grid-column: col 2;
+  justify-self: end;
 }

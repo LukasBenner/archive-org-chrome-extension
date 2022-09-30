@@ -10,19 +10,22 @@ const getCurrentUrl = async () => {
 function saveInBrowserStorage(storageRequest, response) {
   var savedPages = [];
   storageRequest.then((result) => {
-    console.log(result, 'result');
-    if('savedPages' in result)
+    if('savedPages' in result){
       savedPages = result['savedPages'];
-    savedPages.push(response.url);
-    console.log(savedPages, 'savedPages');
+    }
+    const re = /https:\/\/web.archive.org\/web\/[0-9]*\/(.*)/i;
+    const found = response.url.match(re);
+    const savedUrl = found[1];
+    savedPages.push({'savedUrl':savedUrl, 'archiveLink': response.url, 'date': Date.now()});
     chrome.storage.local.set({ 'savedPages': savedPages });
   })
 }
 
+const clearPages = () => {
+  chrome.storage.local.clear();
+}
 
-function popupMsgReceived(request, sender, sendResponse) {
-  console.log("entered function");
-
+const savePage = (sendResponse) => {
   const urlRequest = getCurrentUrl();
   urlRequest.then((url) => {
     const saveRequest = fetch(`${baseUrl}${url}`);
@@ -35,17 +38,29 @@ function popupMsgReceived(request, sender, sendResponse) {
         } catch (error) {
           sendResponse({error: "Problem saving the url in browser storage!"});
         }
-  
         sendResponse({url: response.url})
       }
       else{
-        if(response.statusText == 'No Reason Phrase')
-          sendResponse({error: 'This url is a page saved on archive.org!'});
-        else
-          sendResponse({error: response.statusText});
+          sendResponse({error: "No Reason to save this page!"});
       }
-    }));
+    })).catch((err) => {
+      console.log(err);
+      sendResponse({error: "Problem reaching archive.org!"});
+    });
   })
+  .catch((err) => {
+    sendResponse({error: "Couldn't get current tab url!"});
+  })
+}
+
+function popupMsgReceived(request, sender, sendResponse) {
+
+  if(request.action == "save"){
+    savePage(sendResponse);
+  }
+  else if(request.action == "clear"){
+    clearPages();
+  }
   return true;
 }
 

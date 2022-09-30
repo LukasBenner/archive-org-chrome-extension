@@ -5,36 +5,39 @@ const visit = document.querySelector("#visit");
 const success = document.querySelector(".success");
 const copyToClipboard = document.querySelector("#copyToClipboard");
 const pagesDiv = document.querySelector(".pages")
-
+const clearPagesButton = document.querySelector('#clearPages');
 
 saving.style.display = "none";
 success.style.display = "none";
 errors.style.display = "none";
+pagesDiv.style.display = "none";
 
 
-function createNewPageFragment(url){
-
-  const re = /https:\/\/web.archive.org\/web\/[0-9]*\/(.*)/i;
-  const found = url.match(re);
+function createNewPageFragment( {savedUrl, archiveLink, date }){
 
   var link = document.createElement('a');
-  link.innerText = found[1];
-  link.setAttribute('href', url);
+  link.innerText = savedUrl;
+  link.setAttribute('href', savedUrl);
   link.setAttribute('target', '_blank');
 
   var copyButton = document.createElement('button');
   copyButton.classList.add('btn', 'btn-copy')
   copyButton.innerText = 'Copy';
   copyButton.addEventListener('click', async () => {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(archiveLink);
   })
 
+  var dateLabel = document.createElement('label');
+  dateLabel.classList.add('dateLabel')
+  dateLabel.innerText = `${new Date(date).toLocaleString("de-de")}`;
+ 
   var page = document.createElement('div');
   page.className = "savedPage"
 
   var savedPageFragment = document.createDocumentFragment();
   page.appendChild(link);
   page.appendChild(copyButton);
+  page.appendChild(dateLabel);
   savedPageFragment.appendChild(page);
 
   return savedPageFragment;
@@ -54,7 +57,7 @@ function handleResponse(response) {
   }
 }
 
-const handleSumbit = () => {
+const handleSubmit = () => {
   saving.style.display = "block";
   errors.style.display = "none";
   success.style.display= "none";
@@ -76,16 +79,27 @@ function updateSavedPagesList() {
     if (result['savedPages']) {
       savedPages = result['savedPages'];
     }
+    savedPages.sort(function(pageA, pageB){return pageB.date - pageA.date});
+    
+    if(savedPages.length > 0)
+      pagesDiv.style.display = "block";
+    else
+    pagesDiv.style.display = "none";
+
     pagesDiv.innerHTML = '';
     savedPages.forEach(page => {
       const child = createNewPageFragment(page);
       pagesDiv.appendChild(child);
     });
-
   });
 }
 
-saveButton.addEventListener("click", e => handleSumbit(e));
+const handleClearPages  = () => {
+  chrome.runtime.sendMessage({action: "clear"});
+}
+
+saveButton.addEventListener("click", e => handleSubmit(e));
+clearPagesButton.addEventListener("click", () => handleClearPages())
 copyToClipboard.addEventListener("click", () => handleCopyToClipboard())
 visit.addEventListener("click", () => handleVisit());
 chrome.storage.local.onChanged.addListener(updateSavedPagesList);

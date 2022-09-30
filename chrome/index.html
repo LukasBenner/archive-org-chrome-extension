@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body class="container">
-  <div class="act">
+  <div class="flex-row">
     <p>Store this site on archive.org</p>
     <button id="save" class="btn btn-save">Save</button>
   </div>
@@ -19,7 +19,11 @@
     </div>
     <div id="errors" class="info"></div>
   </div>
-  <p>Previously saved pages:</p>
+  <hr>
+  <div class="flex-row">
+    <p>Previously saved pages:</p>
+    <button id="clearPages" class="btn btn-clearPages">Clear pages</button>
+  </div>
   <div class="pages">
   </div>
   <script src="index.js"></script>
