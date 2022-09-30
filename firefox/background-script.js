@@ -50,10 +50,7 @@ const savePage = async () => {
       return sendResponse({url: response.url})
     }
     else{
-      if(response.statusText == 'No Reason Phrase')
-        return sendError('Trying to archive an archived page!');
-      else
-        return sendError(response.statusText);
+      return sendError("No Reason to save this page!");
     }
   } catch (error) {
     console.log(error);

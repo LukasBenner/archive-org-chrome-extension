@@ -58,14 +58,12 @@ function handleResponse(response) {
   }
 }
 
-const handleSumbit = () => {
+const handleSubmit = () => {
   saving.style.display = "block";
   errors.style.display = "none";
   success.style.display= "none";
 
-  browser.runtime.sendMessage({
-    action: "save"
-  }).then(handleResponse);
+  browser.runtime.sendMessage({action: "save"}).then(handleResponse);
 };
 
 const handleCopyToClipboard = async () => {
@@ -94,19 +92,16 @@ function updateSavedPagesList() {
       const child = createNewPageFragment(page);
       pagesDiv.appendChild(child);
     });
-
   });
 }
 
 const handleClearPages  = () => {
-  browser.runtime.sendMessage({
-    action: "clear"
-  });
+  browser.runtime.sendMessage({action: "clear"});
 }
 
-saveButton.addEventListener("click", e => handleSumbit(e));
+saveButton.addEventListener("click", e => handleSubmit(e));
+clearPagesButton.addEventListener("click", () => handleClearPages())
 copyToClipboard.addEventListener("click", () => handleCopyToClipboard())
 visit.addEventListener("click", () => handleVisit());
-clearPagesButton.addEventListener("click", () => handleClearPages())
 browser.storage.local.onChanged.addListener(updateSavedPagesList);
 updateSavedPagesList();
