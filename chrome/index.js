@@ -59,8 +59,7 @@ const handleSumbit = () => {
   errors.style.display = "none";
   success.style.display= "none";
 
-  chrome.runtime.sendMessage({action: "save"}, function(response) {
-    console.log(response);});
+  chrome.runtime.sendMessage({action: "save"}, handleResponse);
 };
 
 const handleCopyToClipboard = async () => {
